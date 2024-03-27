@@ -12,18 +12,21 @@ const ChangePass = ()  => {
                         <td>Enter Your Private Code:</td>
                         <td><input type="password" placeholder="Code received in e-mail"/></td>
                     </tr>
+                    <br></br>
                     <tr>
                         <td>Enter Your New Password:</td>
                         <td>
                             <input type="password" placeholder="New Password"/>
                         </td>
                     </tr>
+                    <br></br>
                     <tr>
                         <td>Re-Enter Your New Password:</td>
                         <td>
                             <input type="password" placeholder="Re-Enter Password"/>
                         </td>
                     </tr>
+                    <br></br>
                     <tr>
                         <td></td>
                         <td><button>Submit</button></td>

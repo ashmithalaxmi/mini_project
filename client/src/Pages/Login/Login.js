@@ -1,25 +1,30 @@
 import React, { useState } from 'react';
+import axios from 'axios'
 
 const LoginPage = () => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  }
+  const handleLoginClick = async(e) => {
+    e.preventDefault();
+    const newUser = {
+      name,
+      email,
+      password
+    }
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  }
+    try {
+      // Make a POST request to your backend server to create the user
+      const response = await axios.post('http://localhost:3001/createUser', newUser);
 
-  const handleForgotPasswordClick = () => {
-    // Handle forgot password button click
-    console.log('Forgot password button clicked');
-  }
-
-  const handleLoginClick = () => {
-    // Handle login button click
-    console.log(`Email: ${email}, Password: ${password}`);
+      // Handle the response (if needed)
+      console.log('User created successfully:', response.data);
+      console.log(response.data)
+      
+    } catch (error) {
+      console.error('Error creating uuser:', error);
+    }
   }
 
   return (
@@ -29,28 +34,28 @@ const LoginPage = () => {
       <form>
                 <table>
                     <tr>
-                        <td>Email :</td>
-                        <td><input type="email" placeholder="Email"/></td>
+                        <td>Name :</td>
+                        <td><input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/></td>
                     </tr>
+                    <br></br>
+                    <tr>
+                        <td>Email :</td>
+                        <td><input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/></td>
+                    </tr>
+                    <br></br>
                     <tr>
                         <td>Password :</td>
-                        <td><input type="password" placeholder="Password"/></td>
+                        <td><input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/></td>
                     </tr>
-                    <tr>
-                        <td>User Type:</td>
-                        <td><input type="radio" name="type"/>User <input type="radio" name="type"/>Admin</td>
-                    </tr>
+                    <br></br>
                     <tr>
                         <td>Forgot Password:</td>
                         <td><a href='/ForgotPass'>Reset Password</a></td>
                     </tr>
+                    <br></br>
                     <tr>
                         <td></td>
-                        <td><button>Login</button></td>
-                    </tr>
-                    <tr>
-                        <td>New User:</td>
-                        <td><a href='/Reg'>Register Here!</a></td>
+                        <td><button onClick={handleLoginClick}>Login</button></td>
                     </tr>
                 </table>
             </form>
